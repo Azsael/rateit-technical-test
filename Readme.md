@@ -13,7 +13,7 @@ Candidates are requested to fork the repository, complete the tasks outlined and
 
 ### Overview
 
-RateIt's core business is capturing feedback in the form of ratings from customers, and displaying these to RateIt's clients who can this feedback. The technical test implements a simplified model to represent consumer ratings left for a customer company.
+RateIt's core business is capturing feedback in the form of ratings from customers, and displaying these to RateIt's clients who can action this feedback. The technical test implements a simplified model to represent consumer ratings left for a customer company.
 
 There are two pieces of rating data being captured in this datamodel: a text comment or a Net Promoter Score (NPS). Both are optional (and it's possible that there are ratings that have neither of these data points).
 
