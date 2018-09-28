@@ -1,4 +1,4 @@
-﻿namespace RateIt.TechnicalTest.Data.Models
+﻿namespace RateIt.Entities.Models
 {
     public enum RatingResultType
     {

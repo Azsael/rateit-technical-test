@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RateIt.TechnicalTest.Data.Models
+namespace RateIt.Entities.Models
 {
     public class Company
     {

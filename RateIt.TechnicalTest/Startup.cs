@@ -5,8 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RateIt.TechnicalTest.Configuration;
-using RateIt.TechnicalTest.Data;
+using RateIt.Core.Ioc;
 using StructureMap;
 
 namespace RateIt.TechnicalTest
@@ -34,7 +33,7 @@ namespace RateIt.TechnicalTest
             var container = new Container();
             container.Configure(config =>
             {
-                config.AddRegistry<DatabaseRegistry>();
+                config.AddRegistry<CoreRegistry>();
                 config.Populate(services);
             });
 
@@ -78,8 +77,7 @@ namespace RateIt.TechnicalTest
                 }
             });
 
-            //creates and seeds the database
-            app.ApplicationServices.GetService<IRatingsContext>().Database.EnsureCreated();
+	        CoreRegistry.OnConfigure(app.ApplicationServices);
         }
     }
 }

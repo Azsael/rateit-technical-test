@@ -1,25 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using CsvHelper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using RateIt.TechnicalTest.Data.Models;
+using RateIt.Entities.Models;
 
-namespace RateIt.TechnicalTest.Data
+namespace RateIt.Entities.Context
 {
-    public interface IRatingsContext
-    {
-        DbSet<Company> Companies { get; set; }
-        DbSet<Rating> Ratings { get; set; }
-        DbSet<RatingResult> RatingResults { get; set; }
-
-        DatabaseFacade Database { get; }
-    }
-
-    public class RatingsContext : DbContext, IRatingsContext
+    internal class RatingsContext : DbContext, IRatingsContext
     {
         public DbSet<Company> Companies { get; set; }
 
@@ -60,7 +49,7 @@ namespace RateIt.TechnicalTest.Data
 
             //read all of the comments
             var comments = new List<string>();
-            using (var commentsStream = asm.GetManifestResourceStream("RateIt.TechnicalTest.Data.SeedData.comments.txt"))
+            using (var commentsStream = asm.GetManifestResourceStream("RateIt.Entities.SeedData.comments.txt"))
             using (var commentsTextReader = new StreamReader(commentsStream))
             {
                 while (!commentsTextReader.EndOfStream)
@@ -69,7 +58,7 @@ namespace RateIt.TechnicalTest.Data
                 }
             }
 
-            using (var stream = asm.GetManifestResourceStream("RateIt.TechnicalTest.Data.SeedData.ratings.csv"))
+            using (var stream = asm.GetManifestResourceStream("RateIt.Entities.SeedData.ratings.csv"))
             using (var ratingsTextReader = new StreamReader(stream))
             using (var csvReader = new CsvReader(ratingsTextReader))
             {

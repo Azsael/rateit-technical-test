@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RateIt.TechnicalTest.Migrations
+namespace RateIt.Entities.Migrations
 {
     public partial class InitialCreateAndSeed : Migration
     {
