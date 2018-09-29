@@ -2,8 +2,8 @@
 {
 	public enum NPSTrendPeriod
 	{
-		Daily,
-		Weekly,
-		Monthly
+		Daily = 1,
+		Weekly = 2,
+		Monthly = 3
 	}
 }

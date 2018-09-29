@@ -6,6 +6,6 @@ namespace RateIt.Core.Reporting.Models
 	{
 		public NPSTrendPeriod TrendPeriod { get; set; }
 		public DateTime TrendTime { get; set; }
-		public int? Score { get; set; }
+		public int Score { get; set; }
 	}
 }

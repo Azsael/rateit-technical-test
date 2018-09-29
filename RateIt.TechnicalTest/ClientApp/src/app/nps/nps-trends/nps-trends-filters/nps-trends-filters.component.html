@@ -1,0 +1,25 @@
+<form [formGroup]="form" class="columns">
+	<mat-form-field class="column">
+		<mat-datepicker-toggle matPrefix [for]="from"></mat-datepicker-toggle>
+		<input matInput [matDatepicker]="from" placeholder="Start" formControlName="from" (click)="from.open()" />
+		<mat-datepicker #from></mat-datepicker>
+	</mat-form-field>
+
+	<mat-form-field class="column">
+		<mat-datepicker-toggle matPrefix [for]="to"></mat-datepicker-toggle>
+		<input matInput [min]="form.value.from" [matDatepicker]="to" placeholder="End" formControlName="to" (click)="to.open()" />
+		<mat-datepicker #to></mat-datepicker>
+	</mat-form-field>
+
+	<mat-form-field *ngIf="companies" class="column">
+		<mat-select formControlName="companyIds" placeholder="Company">
+			<mat-option *ngFor="let company of companies" [value]="company.companyId">{{company.name}}</mat-option>
+		</mat-select>
+	</mat-form-field>
+
+	<mat-form-field class="column">
+		<mat-select formControlName="trendPeriod" placeholder="Trend Period">
+			<mat-option *ngFor="let period of trendPeriods" [value]="period">{{NPSTrendPeriod[period]}}</mat-option>
+		</mat-select>
+	</mat-form-field>
+</form>

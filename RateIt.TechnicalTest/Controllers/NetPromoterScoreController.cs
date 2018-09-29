@@ -16,7 +16,7 @@ namespace RateIt.TechnicalTest.Controllers
 		    _npsReportService = npsReportService;
 	    }
 
-		[HttpGet]
+		[HttpGet("Trends")]
 		public Task<IList<NPSRating>> GetNPSTrends([FromQuery]NPSTrendFilter filter)
 		{
 			return _npsReportService.GetNPSTrends(filter);

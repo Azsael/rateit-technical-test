@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RateIt.Common\RateIt.Common.csproj" />
     <ProjectReference Include="..\RateIt.Entities\RateIt.Entities.csproj" />
   </ItemGroup>
 

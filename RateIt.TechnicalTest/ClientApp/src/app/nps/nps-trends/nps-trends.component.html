@@ -1,3 +1,7 @@
-<p>
-  nps-trends works!
-</p>
+<div class="section">
+	<div class="container">
+		<app-nps-trends-filters (change)="loadTrends($event)"></app-nps-trends-filters>
+
+		<div [chart]="chart"></div>
+	</div>
+</div>

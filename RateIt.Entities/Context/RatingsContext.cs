@@ -16,10 +16,7 @@ namespace RateIt.Entities.Context
 
         public DbSet<RatingResult> RatingResults { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlite("Data Source=ratings.db");
-        }
+	    public RatingsContext(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
