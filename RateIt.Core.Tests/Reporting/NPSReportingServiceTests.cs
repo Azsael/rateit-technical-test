@@ -2,10 +2,8 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Microsoft.EntityFrameworkCore;
 using RateIt.Core.Reporting;
 using RateIt.Core.Reporting.Models;
-using RateIt.Entities.Models;
 using RateIt.Entities.Tests;
 using Xunit;
 
@@ -19,16 +17,7 @@ namespace RateIt.Core.Tests.Reporting
 		{
 			var context = TestEntityFactory.SetupContext();
 			var entityFactory = TestEntityFactory.SetupEntityFactory(context);
-			var company = new Company
-			{
-				Id = 3,
-				Name = "Greenberry",
-				Timezone = "Australian Western Standard Time"
-			};
-			context.Companies.Attach(company);
-			company.Timezone = "Australian Western Standard Time";
-			((DbContext)context).SaveChanges();
-			var companies = context.Companies.ToList();
+
 			_service = new NPSReportingService(entityFactory);
 		}
 
@@ -60,7 +49,7 @@ namespace RateIt.Core.Tests.Reporting
 			var ratings = await _service.GetNPSTrends(filter);
 
 			ratings.Should().NotBeNullOrEmpty();
-			ratings.Should().OnlyContain(x => x.TrendTime > filter.From.Value );
+			ratings.Should().OnlyContain(x => x.TrendTime >= filter.From.Value );
 		}
 
 		[Fact]
@@ -109,17 +98,27 @@ namespace RateIt.Core.Tests.Reporting
 		[Fact]
         public void GivenGetNPSTrendBucket_WhenBucketIsWeekly_ThenResultIsStartOfWeek()
 		{
-			var result = _service.GetNPSTrendBucket(new DateTime(2018, 9, 20), "UTC", NPSTrendPeriod.Weekly);
+			var result = _service.GetNPSTrendBucket(new DateTimeOffset(new DateTime(2018, 9, 20), TimeSpan.Zero), "UTC", NPSTrendPeriod.Weekly);
 
 			result.Should().Be(new DateTime(2018, 9, 16));
 
-			result = _service.GetNPSTrendBucket(new DateTime(2018, 1, 1), "UTC", NPSTrendPeriod.Weekly);
+			result = _service.GetNPSTrendBucket(new DateTimeOffset(new DateTime(2018, 1, 1), TimeSpan.Zero), "UTC", NPSTrendPeriod.Weekly);
 
 			result.Should().Be(new DateTime(2018, 1, 1));
 
-			result = _service.GetNPSTrendBucket(new DateTime(2018, 1, 8), "UTC", NPSTrendPeriod.Weekly);
+			result = _service.GetNPSTrendBucket(new DateTimeOffset(new DateTime(2018, 1, 8), TimeSpan.Zero), "UTC", NPSTrendPeriod.Weekly);
 
-			result.Should().Be(new DateTime(2018, 1, 8));
+			result.Should().Be(new DateTime(2018, 1, 7));
+
+			result = _service.GetNPSTrendBucket(new DateTimeOffset(new DateTime(2019, 1, 1), TimeSpan.Zero), "UTC", NPSTrendPeriod.Weekly);
+
+			result.Should().Be(new DateTime(2019, 1, 1));
+			result = _service.GetNPSTrendBucket(new DateTimeOffset(new DateTime(2019, 1, 6), TimeSpan.Zero), "UTC", NPSTrendPeriod.Weekly);
+
+			result.Should().Be(new DateTime(2019, 1, 6));
+			result = _service.GetNPSTrendBucket(new DateTimeOffset(new DateTime(2019, 1, 10), TimeSpan.Zero), "UTC", NPSTrendPeriod.Weekly);
+
+			result.Should().Be(new DateTime(2019, 1, 6));
 		}
     }
 }

@@ -13,6 +13,7 @@
 
 	<mat-form-field *ngIf="companies" class="column">
 		<mat-select formControlName="companyIds" placeholder="Company">
+			<mat-option>Select</mat-option>
 			<mat-option *ngFor="let company of companies" [value]="company.companyId">{{company.name}}</mat-option>
 		</mat-select>
 	</mat-form-field>

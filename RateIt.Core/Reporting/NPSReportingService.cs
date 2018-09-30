@@ -72,8 +72,13 @@ namespace RateIt.Core.Reporting
 
 			// how do you do weekly? is it from start bracket (to/from) or the days of the week or is it from weeks of the year?
 			// lets just do this weird formula of week of year as first day, being a sunday or such? ODD!
-			var culture = CultureInfo.InvariantCulture;
-			return culture.Calendar.AddWeeks(new DateTime(dateTime.Year, 1, 1), culture.Calendar.GetWeekOfYear(dateTime.Date, CalendarWeekRule.FirstDay, DayOfWeek.Sunday) - 1);
+			var date = dateTime.Date;
+
+			while (date.DayOfWeek != DayOfWeek.Sunday && date.DayOfYear != 1)
+			{
+				date = date.AddDays(-1);
+			}
+			return date;
 		}
 	}
 }

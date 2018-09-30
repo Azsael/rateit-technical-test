@@ -22,8 +22,8 @@ import { NpsTrendsComponent } from './nps-trends/nps-trends.component';
     MatDatepickerModule
   ],
   declarations: [
-    NpsTrendsComponent, 
-     NpsTrendsFiltersComponent
+    NpsTrendsComponent,
+    NpsTrendsFiltersComponent
   ],
   providers: [NpsTrendsService]
 })
